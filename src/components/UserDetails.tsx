@@ -3,6 +3,11 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
+//importing JSON
+import empdata from '../sourcejson/empdata.json';
+
+//custom components
+
 //Interface
 interface UserDetailsProps {
   id: number,
@@ -10,6 +15,30 @@ interface UserDetailsProps {
 }
 
 const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
+
+  const completeData = empdata.data;
+  const [currentEmpData, setCurrentEmpData] = React.useState({
+    id: 0,
+    name: "",
+    post: "",
+    dob: "",
+    phone: 0,
+    email: "",
+    address: ""
+  })
+
+  const settingData = () =>{
+    completeData.map((data)=>{
+      if(data.id === props.id){
+        setCurrentEmpData(data)
+      }
+    })
+  }
+
+  React.useEffect(()=>{
+    settingData();
+  },[props.id])
+
   return (
     <>
     <Box style={{
@@ -26,7 +55,7 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
       <Box style={{width: "100%", display: 'flex', justifyContent: 'flex-end'}}>
         <ClearOutlinedIcon onClick={()=>props.setEmployeeId(0)} />
       </Box>
-      {props.id}'s Details will be shown
+      {currentEmpData.name}'s Details will be shown
     </Box>
     </>
   );
