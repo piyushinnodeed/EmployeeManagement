@@ -1,26 +1,31 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import Menu from '@mui/material/Menu';
-import MenuIcon from '@mui/icons-material/Menu';
-import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import Tooltip from '@mui/material/Tooltip';
-import MenuItem from '@mui/material/MenuItem';
+import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 
 //Interface
 interface UserDetailsProps {
-  id: number
+  id: number,
+  setEmployeeId: any
 }
 
 const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
   return (
     <>
-    <Box style={{backgroundColor: "#E4EAFF", width: "100%", height: "550px", position: 'fixed', marginTop: "25px"}}>
+    <Box style={{
+        backgroundColor: "#E4EAFF",
+        width: "29%",
+        height: "-webkit-fill-available",
+        position: 'fixed',
+        marginTop: "100px",
+        borderRadius: "10px",
+        marginLeft: "5px",
+        marginRight: "5px",
+        border: '2px solid grey'
+      }}>
+      <Box style={{width: "100%", display: 'flex', justifyContent: 'flex-end'}}>
+        <ClearOutlinedIcon onClick={()=>props.setEmployeeId(0)} />
+      </Box>
       {props.id}'s Details will be shown
     </Box>
     </>

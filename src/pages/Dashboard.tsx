@@ -40,7 +40,7 @@ const Dashboard = () => {
     <>
       <AppHeader name={"Dashboard"} bgcolor={"#303c6c"}/>
         <Box style={{display: 'flex'}}>
-        <Box style={{marginTop: '20px', width: listWidth}}>
+        <Box style={{marginTop: '95px', width: listWidth}}>
           {
             empdata.data.map((data) =>
               <UserRow id={data.id} name={data.name} post={data.post} email={data.email} employeeId={employeeId} setEmployeeId={setEmployeeId} />
@@ -48,7 +48,7 @@ const Dashboard = () => {
           }
         </Box>
         <Box style={{width: detailsWidth}}>
-          <UserDetails id={employeeId}/>
+          <UserDetails id={employeeId} setEmployeeId={setEmployeeId}/>
         </Box>
       </Box>
     </>

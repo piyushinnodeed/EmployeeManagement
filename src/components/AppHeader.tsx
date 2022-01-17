@@ -59,7 +59,7 @@ const AppHeader: FC<AppHeaderProps> = (props): JSX.Element => {
   };
 
   return (
-    <AppBar position="static" style={{background: props.bgcolor}}>
+    <AppBar position="fixed" style={{background: props.bgcolor}}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Typography
