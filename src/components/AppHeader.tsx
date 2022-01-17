@@ -19,7 +19,7 @@ import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 
 
-import ThemeModeSwitch from './ThemeModeSwitch'
+import DarkLightSwitch from './DarkLightSwitch'
 
 interface AppHeaderProps {
     name: string,
@@ -81,7 +81,7 @@ const AppHeader: FC<AppHeaderProps> = (props): JSX.Element => {
           <Box sx={{ flexGrow: 0}}>
             <FormGroup>
                 <FormControlLabel
-                    control={<ThemeModeSwitch sx={{ m: 1 }} />}
+                    control={<DarkLightSwitch sx={{ m: 1 }} />}
                     label=""
                 />
             </FormGroup>
