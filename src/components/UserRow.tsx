@@ -23,6 +23,7 @@ interface UserRowProps {
     name: string,
     post: string,
     email: string,
+    img?: string,
     employeeId: number,
     setEmployeeId ?: any
 }
@@ -57,9 +58,11 @@ const UserRow: FC<UserRowProps> = (props): JSX.Element => {
   return (
     <>
         <Box style={{display: 'flex', border: '2px solid grey', borderRadius: '10px', margin: '5px', backgroundColor: '#E4EAFF'}} onClick={()=>SettingEmpID(props.id)}>
-            <Avatar sx={{ bgcolor: avatarBgcolor }} style={{margin: '5px', alignSelf: 'center'}}>
-                {GetInitials(props.name)}
-            </Avatar>
+            {props.img ? <Avatar alt={props.name} src={props.img} style={{margin: '5px', alignSelf: 'center'}} /> :
+              <Avatar sx={{ bgcolor: avatarBgcolor }} style={{margin: '5px', alignSelf: 'center'}}>
+                  {GetInitials(props.name)}
+              </Avatar>
+            }
             <Typography style={{alignSelf: 'center', marginLeft: '5px', display: 'flex', width: "20%"}}>{props.name}</Typography>
             <Box style={{display: 'flex', width: "100%", justifyContent: 'space-evenly'}}>
                 <Typography style={{alignSelf: 'center', display: 'flex'}}>{props.post}</Typography>

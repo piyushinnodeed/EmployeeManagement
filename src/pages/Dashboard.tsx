@@ -43,7 +43,7 @@ const Dashboard = () => {
         <Box style={{marginTop: '95px', width: listWidth}}>
           {
             empdata.data.map((data) =>
-              <UserRow id={data.id} name={data.name} post={data.post} email={data.email} employeeId={employeeId} setEmployeeId={setEmployeeId} />
+              <UserRow id={data.id} name={data.name} post={data.post} email={data.email} employeeId={employeeId} setEmployeeId={setEmployeeId} img={data.img} />
             )
           }
         </Box>
