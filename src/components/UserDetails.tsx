@@ -10,6 +10,7 @@ import { Modal, TextField, Typography } from '@mui/material';
 
 //axios
 import axios from 'axios';
+import UserEditForm from './UserEditForm';
 
 //custom components
 
@@ -18,18 +19,6 @@ interface UserDetailsProps {
   id: number,
   setEmployeeId: any
 }
-
-const style = {
-  position: 'absolute' as 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 500,
-  bgcolor: '#E4EAFF',
-  border: '2px solid grey',
-  boxShadow: 24,
-  p: 4,
-};
 
 const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
 
@@ -86,25 +75,12 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
 
   return (
     <>
-
-    <Modal
-      open={openEditModal}
-      onClose={()=>setOpenEditModal(false)}
-    >
-      <Box sx={style}>
-        <Box style={{width: "100%", display: 'flex', justifyContent: 'flex-end'}}>
-          <CancelIcon onClick={()=>setOpenEditModal(false)} style={{ margin: "5px", fill:'black'}} />
-        </Box>
-        <Typography style={{textAlign: 'center', fontSize: '30px', marginBottom: '30px'}}>Edit Details</Typography>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>Name : </Typography><TextField id="name" label={currentEmpData.name} /></Box>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>Post : </Typography><TextField id="post" label={currentEmpData.post} /></Box>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>DOB : </Typography><TextField id="dob" label={currentEmpData.dob} /></Box>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>Phone : </Typography><TextField id="phone" label={currentEmpData.phone} /></Box>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>Email : </Typography><TextField id="email" label={currentEmpData.email} /></Box>
-        <Box style={{display: 'flex', alignItems: 'baseline', justifyContent: 'space-around'}}><Typography style={{fontSize: '20px', margin: '20px'}}>Address : </Typography><TextField id="address" label={currentEmpData.address} /></Box>
-      </Box>
-    </Modal>
-
+    {openEditModal && <UserEditForm 
+      currentEmpData={currentEmpData}
+      setCurrentEmpData={setCurrentEmpData}
+      openEditModal={openEditModal} 
+      setOpenEditModal={setOpenEditModal} 
+    />}
     <Box style={{
         backgroundColor: "#E4EAFF",
         width: "29%",
@@ -124,7 +100,7 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
         backgroundColor: "#303c6c"
       }}>
         <Box style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
-          <CreateIcon onClick={()=>setOpenEditModal(true)} style={{ margin: "5px", fill:'white'}} />
+          <CreateIcon onClick={()=>{setOpenEditModal(true)}} style={{ margin: "5px", fill:'white'}} />
           <CancelIcon onClick={()=>props.setEmployeeId(0)} style={{ margin: "5px", fill:'white'}} />
         </Box>
         {currentEmpData.img ? <img src={currentEmpData.img} alt={currentEmpData.name} style={{height: "200px", width: '-webkit-fill-available', marginLeft: "80px", marginRight: "80px", marginBottom: "30px"}}/> :

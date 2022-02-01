@@ -18,13 +18,17 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled } from '@mui/material/styles';
 import Switch, { SwitchProps } from '@mui/material/Switch';
 
+import ThemeContext , {themes} from '../theme-context';
 
 import DarkLightSwitch from './DarkLightSwitch'
+import { setSyntheticLeadingComments } from 'typescript';
 
 interface AppHeaderProps {
     name: string,
     bgcolor ?: string,
-    fontColor ?: string
+    fontColor ?: string,
+    theme ?: any,
+    setTheme ?: any
 }
 
 
@@ -33,6 +37,7 @@ const AppHeader: FC<AppHeaderProps> = (props): JSX.Element => {
   const settings = props.name === "Dashboard" ? ['Profile', 'Logout'] : ['Dashboard', 'Logout'];
   const headingColor = props.fontColor ? props.fontColor : "white";
   const navigate = useNavigate();
+  const [btnText, setBtnText] = React.useState("LIGHT")
 
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
@@ -58,6 +63,11 @@ const AppHeader: FC<AppHeaderProps> = (props): JSX.Element => {
     setAnchorElUser(null);
   };
 
+  const btnClick = () =>{
+      props.theme === themes.light ? props.setTheme(themes.dark) : props.setTheme(themes.light);
+      btnText === "LIGHT" ? setBtnText("DARK") : setBtnText("LIGHT");
+  }
+
   return (
     <AppBar position="fixed" style={{background: props.bgcolor}}>
       <Container maxWidth="xl">
@@ -78,14 +88,16 @@ const AppHeader: FC<AppHeaderProps> = (props): JSX.Element => {
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
           </Box>
 
-          <Box sx={{ flexGrow: 0}}>
+          {/* <Box sx={{ flexGrow: 0}}>
             <FormGroup>
                 <FormControlLabel
                     control={<DarkLightSwitch sx={{ m: 1 }} />}
                     label=""
                 />
             </FormGroup>
-          </Box>
+          </Box> */}
+
+          <Button variant='contained' style={{marginRight: "30px"}} onClick={btnClick}>{btnText}</Button>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open Menu">

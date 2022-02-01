@@ -64,7 +64,7 @@ const UserRow: FC<UserRowProps> = (props): JSX.Element => {
 
   return (
     <>
-        <Box style={{display: 'flex', border: '2px solid grey', borderRadius: '10px', margin: '5px', backgroundColor: '#E4EAFF'}} onClick={()=>SettingEmpID(props.id)}>
+        <Box style={{display: 'flex', border: '2px solid grey', borderRadius: '10px', margin: '5px', backgroundColor: '#E4EAFF', color: 'black'}} onClick={()=>SettingEmpID(props.id)}>
             {props.img ? <Avatar alt={props.name} src={props.img} style={{margin: '5px', alignSelf: 'center'}} /> :
               <Avatar sx={{ bgcolor: avatarBgcolor }} style={{margin: '5px', alignSelf: 'center'}}>
                   {GetInitials(props.name)}

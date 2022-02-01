@@ -20,11 +20,18 @@ import AppHeader from '../components/AppHeader';
 import UserRow from '../components/UserRow';
 import UserDetails from '../components/UserDetails';
 import { resolve } from 'path/win32';
+import ThemeContext from '../theme-context';
+import { FC } from 'react';
 
 //json data
 // import empdata from '../sourcejson/empdata.json';
 
-const Dashboard = () => {
+interface DashProps {
+  theme: any,
+  setTheme: any
+}
+
+const Dashboard: FC<DashProps> = (props): JSX.Element => {
   const [employeeId, setEmployeeId] = React.useState(0) //employee ID will be set
   const [listWidth, setListWidth] = React.useState("100%");
   const [detailsWidth, setDetailsWidth] = React.useState("0%");
@@ -41,6 +48,8 @@ const Dashboard = () => {
   }]});
 
   const url = "http://localhost:5500/employees";  
+
+  const theme = React.useContext(ThemeContext);
   
   const getDataFromAPI = () => { 
     axios.get(url)
@@ -68,9 +77,9 @@ const Dashboard = () => {
 
   return (
     <>
-      <AppHeader name={"Dashboard"} bgcolor={"#303c6c"}/>
-        <Box style={{display: 'flex'}}>
-        <Box style={{marginTop: '95px', width: listWidth}}>
+      <AppHeader name={"Dashboard"} bgcolor={"#303c6c"} theme={ props.theme } setTheme={props.setTheme}/>
+      <Box style={theme}>
+        <Box style={{marginTop: '95px', width: listWidth }}>
           {
             empdata.data.map((data) =>
               <UserRow id={data.id} name={data.name} post={data.post} email={data.email} employeeId={employeeId} setEmployeeId={setEmployeeId} img={data.img} />
