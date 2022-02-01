@@ -6,7 +6,10 @@ import CreateIcon from '@mui/icons-material/Create';
 import { Modal, TextField, Typography } from '@mui/material';
 
 //importing JSON
-import empdata from '../sourcejson/empdata.json';
+// import empdata from '../sourcejson/empdata.json';
+
+//axios
+import axios from 'axios';
 
 //custom components
 
@@ -30,7 +33,6 @@ const style = {
 
 const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
 
-  const completeData = empdata.data;
   const [openEditModal, setOpenEditModal] = React.useState(false);
   const [currentEmpData, setCurrentEmpData] = React.useState({
     id: 0, 
@@ -42,6 +44,33 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
     address: "",
     img: ""
   });
+
+  const [empdata, setEmpdata] = React.useState({"status":0, "data": [{
+    "id": 0,
+    "name": "",
+    "post": "",
+    "dob": "",
+    "phone": 0,
+    "email": "",
+    "address": "",
+    "img": ""
+  }]});
+
+  const completeData = empdata.data;
+
+  const url = "http://localhost:5500/employees";  
+  
+  const getDataFromAPI = () => { 
+    axios.get(url)
+    .then(res => {
+      setEmpdata(res);
+      const persons = res.data;
+    })
+  }
+
+  React.useEffect(()=>{
+    getDataFromAPI();
+  },[])
 
   const settingData = () =>{
     completeData.map((data)=>{

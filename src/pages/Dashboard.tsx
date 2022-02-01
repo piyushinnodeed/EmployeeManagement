@@ -12,17 +12,47 @@ import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 
+//axios
+import axios from "axios";
+
 //Custom Components
 import AppHeader from '../components/AppHeader';
 import UserRow from '../components/UserRow';
 import UserDetails from '../components/UserDetails';
+import { resolve } from 'path/win32';
+
 //json data
-import empdata from '../sourcejson/empdata.json';
+// import empdata from '../sourcejson/empdata.json';
 
 const Dashboard = () => {
   const [employeeId, setEmployeeId] = React.useState(0) //employee ID will be set
   const [listWidth, setListWidth] = React.useState("100%");
   const [detailsWidth, setDetailsWidth] = React.useState("0%");
+
+  const [empdata, setEmpdata] = React.useState({"status":0, "data": [{
+    "id": 0,
+    "name": "",
+    "post": "",
+    "dob": "",
+    "phone": 0,
+    "email": "",
+    "address": "",
+    "img": ""
+  }]});
+
+  const url = "http://localhost:5500/employees";  
+  
+  const getDataFromAPI = () => { 
+    axios.get(url)
+    .then(res => {
+      setEmpdata(res);
+      console.log(res.data)
+    })
+  }
+
+  React.useEffect(()=>{
+    getDataFromAPI();
+  },[])
   
   //for switching width of the 2 divs
   React.useEffect(()=>{

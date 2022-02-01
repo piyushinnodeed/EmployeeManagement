@@ -30,9 +30,16 @@ interface UserRowProps {
 
 //custom functions
 const GetInitials = (props: any) => {
-    const fullName = props.split(' ');
-    const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
-    return initials.toUpperCase();
+    if(props === ""){
+      return "NA"
+    }
+    else{
+      const fullName = props.split(' ');
+      const initials = fullName.shift().charAt(0) + fullName.pop().charAt(0);
+      return initials.toUpperCase();
+    }
+    // console.log(fullName)
+    // return fullName
 }
 
 const UserRow: FC<UserRowProps> = (props): JSX.Element => {
