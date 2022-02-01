@@ -3,6 +3,7 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import CancelIcon from '@mui/icons-material/Cancel';
 import CreateIcon from '@mui/icons-material/Create';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { Modal, TextField, Typography } from '@mui/material';
 
 //importing JSON
@@ -69,6 +70,15 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
     })
   }
 
+  const deleteEmployee = (id: any) =>{
+    axios.get(`http://localhost:5500/employees/${id}`)
+      .then(res => {
+        console.log(res);
+        console.log(res.data);
+        alert("DELETED")
+      })
+  }
+
   React.useEffect(()=>{
     settingData();
   },[props.id])
@@ -101,6 +111,7 @@ const UserDetails: React.FC<UserDetailsProps> = (props): JSX.Element => {
       }}>
         <Box style={{width: "100%", display: 'flex', justifyContent: 'space-between'}}>
           <CreateIcon onClick={()=>{setOpenEditModal(true)}} style={{ margin: "5px", fill:'white'}} />
+          <DeleteIcon onClick={()=>{deleteEmployee(currentEmpData.id)}} style={{ margin: "5px", fill:'white'}} />
           <CancelIcon onClick={()=>props.setEmployeeId(0)} style={{ margin: "5px", fill:'white'}} />
         </Box>
         {currentEmpData.img ? <img src={currentEmpData.img} alt={currentEmpData.name} style={{height: "200px", width: '-webkit-fill-available', marginLeft: "80px", marginRight: "80px", marginBottom: "30px"}}/> :
